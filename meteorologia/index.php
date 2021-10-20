@@ -46,7 +46,7 @@ $sorok = MeteoAdatok::osszes();
                 foreach ($sorok as $sor) {
                     echo "<tr>";
                         echo "<td>" . $sor->getDatum()->format('Y-m-d H:i:s') . "</td>";
-                        echo "<td>" . $sor->getHofok() . "</td>";
+                        echo "<td>" . $sor->getHofok() . " °C</td>";
                         echo "<td>" . $sor->getLeiras() . "</td>";
                     echo "</tr>";
     }
