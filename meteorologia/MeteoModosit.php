@@ -20,7 +20,7 @@ if ($_POST['REQUEST_METHOD' === 'POST']) {
     $sor->setHofok($ujHofok);
     $sor->setLeiras($ujLeiras);
 
-    
+
     // UPDATE...
     $bejegyzes->mentes();
 }
@@ -33,6 +33,13 @@ if ($_POST['REQUEST_METHOD' === 'POST']) {
     <title>Szerkesztés</title>
 </head>
 <body>
+
+<form>
+    <input type="datetime" name="ujDatum"><br>
+    <input type="number" name="ujHofok"><br>
+    <input type="text" name="ujLeiras"><br>
+    <input type="submit" value="Szerkeszt!">
+</form>
     
 </body>
 </html>

@@ -44,6 +44,26 @@ class MeteoAdatok {
         return $this->leiras;
     }
 
+    public function setHofok($ujHofok) : int {
+        $this->hofok = $ujHofok;
+        return $ujHofok;
+    }
+
+    public function setLeiras($ujLeiras) : string {
+        $this->leiras = $ujLeiras;
+        return $ujLeiras;
+    }
+
+
+    public function getById($id){
+
+    }
+
+    public static function mentes(){
+        global $db;
+
+        
+    }
 
     // Az adott ID-jű bejegyzést törli. Statikus!
     public static function torol(int $id) {
