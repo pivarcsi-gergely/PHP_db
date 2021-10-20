@@ -19,11 +19,12 @@ class MeteoAdatok {
         global $db;
 
         // Paraméteres lekérdezéskor a ->prepare fv-t kell használni!
-        $db->prepare('INSERT INTO bejegyzesek (tartalom, datum)
-                    VALUES (:tartalom, :datum)')
+        $db->prepare('INSERT INTO hofokok(datum, hofok, leiras)
+                    VALUES (:datum, :hofok, :leiras)')
             ->execute([
-                ':tartalom' => $this->tartalom,
                 ':datum' => $this->datum->format('Y-m-d H:i:s'),
+                ':hofok' => $this->hofok,
+                ':leiras' => $this->leiras,
             ]);
     }
 
@@ -31,20 +32,25 @@ class MeteoAdatok {
         return $this->id;
     }
 
-    public function getTartalom() : string {
-        return $this->tartalom;
-    }
-
     public function getDatum() : DateTime {
         return $this->datum;
     }
+
+    public function getHofok() : int {
+        return $this->hofok;
+    }
+
+    public function getleiras() : string {
+        return $this->leiras;
+    }
+
 
     // Az adott ID-jű bejegyzést törli. Statikus!
     public static function torol(int $id) {
         global $db;
 
         // Paraméteres
-        $db->prepare('DELETE FROM bejegyzesek WHERE id = :id')
+        $db->prepare('DELETE FROM hofokok WHERE id = :id')
             ->execute([':id' => $id]);
     }
 
@@ -53,15 +59,14 @@ class MeteoAdatok {
         // Rossz szokás, a későbbiekben tanulunk rá jobbat
         global $db;
 
-        $t = $db->query("SELECT * FROM bejegyzesek ORDER BY datum DESC")
+        $t = $db->query("SELECT * FROM hofokok ORDER BY hofok DESC")
             ->fetchAll();
         $eredmeny = [];
 
         foreach ($t as $elem) {
-            $bejegyzes = new Bejegyzes($elem['tartalom'],
-                                       new DateTime($elem['datum']));
-            $bejegyzes->id = $elem['id'];
-            $eredmeny[] = $bejegyzes;
+            $sor = new MeteoAdatok(new DateTime($elem['datum']), $elem['hofok'], $elem['leiras']);
+            $sor->id = $elem['id'];
+            $eredmeny[] = $sor;
         }
 
         return $eredmeny;
