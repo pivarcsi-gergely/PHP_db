@@ -40,7 +40,7 @@ class MeteoAdatok {
         return $this->hofok;
     }
 
-    public function getleiras() : string {
+    public function getLeiras() : string {
         return $this->leiras;
     }
 

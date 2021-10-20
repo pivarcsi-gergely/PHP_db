@@ -3,6 +3,7 @@
 require_once 'db.php';
 require_once 'MeteoAdatok.php';
 
+$sorok = MeteoAdatok::osszes();
 
 ?><!DOCTYPE html>
 <html lang="hu">
@@ -11,26 +12,31 @@ require_once 'MeteoAdatok.php';
     <title>Document</title>
 </head>
 <body>
-    <form method="post"></form>
+    <h2>Hőmérsékletek megadása</h2>
+    <form method="post">
+        <input type="number" name="hofok">
+        <input type="text" name="leiras">
+    </form>
 
-    <?php 
+
+    <div>
+        <table>
+            <tr>
+                <th>Dátum</th>
+                <th>Hőfok</th>
+                <th>Leírás</th>
+            </tr>
+            <?php
     
-    foreach ($variable as $key) {
-                //Egy cikk megjelenítése
-                // Minden formázás (pl. dátum, kerekítés stb.) ide kerül, nem a modell osztályba
-                echo "<article>";
-                echo "<h2>";
-                echo $bejegyzes->getDatum()->format('Y-m-d H:i:s');
-                echo "</h2>";
-                echo "<p>" . $bejegyzes->getTartalom() . "</p>";
-                // Törlés gomb: minden gomb egy teljes form
-                echo "<form method='POST'>";
-                echo "<input type='hidden' name='deleteId' value='" . $bejegyzes->getId() . "'>";
-                echo "<button type='submit'>Törlés</button>";
-                echo "</form>";
-                echo '<a href="editBlogPost.php?id"' . $bejegyzes->getID() . '>Szerkesztő</a>';
-                echo "</article>";
+                foreach ($sorok as $sor) {
+                    echo "<tr>";
+                        echo "<td>" . $sor->getDatum->format('Y-m-d H:i:s') . "</td>";
+                        echo "<td>" . $sor->getHofok . "</td>";
+                        echo "<td>" . $sor->getLeiras . "</td>";
+                    echo "</tr>";
     }
-    ?>
+    ?>  
+        </table>
+    </div>
 </body>
 </html>
