@@ -10,6 +10,18 @@ if ($bejegyzesId === null) {
     exit();
 }
 
+// SELECT...
+$bejegyzes = Bejegyzes::getById($id);
+
+if ($_POST['REQUEST_METHOD' === 'POST']) {
+    $ujTartalom = $_POST['tartalom'] ?? '';
+
+    $bejegyzes->setTartalom($ujTartalom);
+
+    // UPDATE...
+    $bejegyzes->mentes();
+}
+
 ?><!DOCTYPE html>
 <html lang="hu">
 <head>
@@ -18,5 +30,10 @@ if ($bejegyzesId === null) {
 </head>
 <body>
     
+<form>
+    <input type="...">
+    <input type="submit" name="" id="">
+</form>
+
 </body>
 </html>
