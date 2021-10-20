@@ -55,6 +55,7 @@ $bejegyzesek = Bejegyzes::osszes();
                 echo "<input type='hidden' name='deleteId' value='" . $bejegyzes->getId() . "'>";
                 echo "<button type='submit'>Törlés</button>";
                 echo "</form>";
+                echo '<a href="editBlogPost.php?id"' . $bejegyzes->getID() . '>Szerkesztő</a>';
                 echo "</article>";
             }
         ?>
