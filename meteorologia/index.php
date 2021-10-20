@@ -48,6 +48,7 @@ $sorok = MeteoAdatok::osszes();
                         echo "<td>" . $sor->getDatum()->format('Y-m-d H:i:s') . "</td>";
                         echo "<td>" . $sor->getHofok() . " °C</td>";
                         echo "<td>" . $sor->getLeiras() . "</td>";
+                        echo "<td>" . '<a href="MeteoModosit.php?id"' . $sor->getId() . '>Szerkesztő</a>' . "</td>";
                     echo "</tr>";
     }
     ?>  

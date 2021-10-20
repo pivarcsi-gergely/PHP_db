@@ -28,7 +28,7 @@ class MeteoAdatok {
             ]);
     }
 
-    public function getId() : ?int { // ? -> lehet null is az értéke
+    public function getId() : ?int {
         return $this->id;
     }
 
