@@ -3,6 +3,20 @@
 require_once 'db.php';
 require_once 'MeteoAdatok.php';
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $deleteId = $_POST['deleteId'] ?? '';
+    if ($deleteId !== '') {
+        MeteoAdatok::torol($deleteId);
+    }
+    else{
+        $ujHofok = $_POST['hofok'] ?? null;
+        $ujLeiras = $_POST['leiras'] ?? '';
+        $ujSor = new MeteoAdatok(new DateTime(), $ujHofok, $ujLeiras);
+        $ujSor->uj();
+    }
+}
+
+
 $sorok = MeteoAdatok::osszes();
 
 ?><!DOCTYPE html>
@@ -16,6 +30,7 @@ $sorok = MeteoAdatok::osszes();
     <form method="post">
         <input type="number" name="hofok">
         <input type="text" name="leiras">
+        <input type="submit" value="Új sor">
     </form>
 
 
@@ -30,9 +45,9 @@ $sorok = MeteoAdatok::osszes();
     
                 foreach ($sorok as $sor) {
                     echo "<tr>";
-                        echo "<td>" . $sor->getDatum->format('Y-m-d H:i:s') . "</td>";
-                        echo "<td>" . $sor->getHofok . "</td>";
-                        echo "<td>" . $sor->getLeiras . "</td>";
+                        echo "<td>" . $sor->getDatum()->format('Y-m-d H:i:s') . "</td>";
+                        echo "<td>" . $sor->getHofok() . "</td>";
+                        echo "<td>" . $sor->getLeiras() . "</td>";
                     echo "</tr>";
     }
     ?>  
