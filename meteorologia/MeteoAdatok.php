@@ -2,12 +2,15 @@
 
 class MeteoAdatok {
     private $id;
-    private $tartalom;
     private $datum;
+    private $hofok;
+    private $leiras;
 
-    public function __construct(string $tartalom, DateTime $datum) {
-        $this->tartalom = $tartalom;
+
+    public function __construct(DateTime $datum, int $hofok, string $leiras) {
         $this->datum = $datum;
+        $this->hofok = $hofok;
+        $this->leiras = $leiras;
     }
 
     // A létrehozott blog bejegyzést menti az adatbazisba.
